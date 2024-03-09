@@ -1,0 +1,281 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "application/javascript": [
+       "\n",
+       "try {\n",
+       "require(['notebook/js/codecell'], function(codecell) {\n",
+       "  codecell.CodeCell.options_default.highlight_modes[\n",
+       "      'magic_text/x-csrc'] = {'reg':[/^%%microblaze/]};\n",
+       "  Jupyter.notebook.events.one('kernel_ready.Kernel', function(){\n",
+       "      Jupyter.notebook.get_cells().map(function(cell){\n",
+       "          if (cell.cell_type == 'code'){ cell.auto_highlight(); } }) ;\n",
+       "  });\n",
+       "});\n",
+       "} catch (e) {};\n"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/javascript": [
+       "\n",
+       "try {\n",
+       "require(['notebook/js/codecell'], function(codecell) {\n",
+       "  codecell.CodeCell.options_default.highlight_modes[\n",
+       "      'magic_text/x-csrc'] = {'reg':[/^%%pybind11/]};\n",
+       "  Jupyter.notebook.events.one('kernel_ready.Kernel', function(){\n",
+       "      Jupyter.notebook.get_cells().map(function(cell){\n",
+       "          if (cell.cell_type == 'code'){ cell.auto_highlight(); } }) ;\n",
+       "  });\n",
+       "});\n",
+       "} catch (e) {};\n"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "# Make sure the base overlay is loaded\n",
+    "from pynq.overlays.base import BaseOverlay\n",
+    "from pynq.lib import Pmod_IO\n",
+    "base = BaseOverlay(\"base.bit\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from pynq.lib.arduino import Arduino_Analog\n",
+    "from pynq.lib.arduino import ARDUINO_GROVE_A1\n",
+    "from pynq.lib.arduino import ARDUINO_GROVE_A2\n",
+    "from pynq.lib.arduino import ARDUINO_GROVE_A3\n",
+    "pmod_pin2 = Pmod_IO(base.PMODA, 2, 'out') \n",
+    "pmod_pin3 = Pmod_IO(base.PMODA, 3, 'out') \n",
+    "analog1 = Arduino_Analog(base.ARDUINO,ARDUINO_GROVE_A1)\n",
+    "analog2 = Arduino_Analog(base.ARDUINO,ARDUINO_GROVE_A2)\n",
+    "analog3 = Arduino_Analog(base.ARDUINO,ARDUINO_GROVE_A3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import requests\n",
+    "import random\n",
+    "import time\n",
+    "\n",
+    "# Define the API URL for RTD sensor and joystick\n",
+    "url = \"https://api.thingspeak.com/update\"\n",
+    "\n",
+    "# Define the API key\n",
+    "api_key = \"53VJ2RBTNRLXJIN9\"\n",
+    "# Define the API URL for reading data\n",
+    "read_url = \"https://api.thingspeak.com/channels/2462354/feeds/last.json?pi_key=53VJ2RBTNRLXJIN9\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Latest values - field3: 0, field4: 1\n",
+      "Field3 is 0\n",
+      "Value 0 was successfully written to field5.\n",
+      "Value 1 was successfully written to field6.\n",
+      "Latest values - field3: 1, field4: 1\n",
+      "Field3 is 1 and Field4 is 1\n",
+      "Value 1 was successfully written to field5.\n",
+      "Value 1 was successfully written to field6.\n",
+      "Latest values - field3: 0, field4: 1\n",
+      "Field3 is 0\n",
+      "Value 0 was successfully written to field5.\n",
+      "Value 1 was successfully written to field6.\n",
+      "Latest values - field3: 1, field4: 1\n",
+      "Field3 is 1 and Field4 is 1\n",
+      "Value 1 was successfully written to field5.\n",
+      "Value 1 was successfully written to field6.\n",
+      "Latest values - field3: 1, field4: 1\n",
+      "Field3 is 1 and Field4 is 1\n",
+      "Value 1 was successfully written to field5.\n",
+      "Value 1 was successfully written to field6.\n",
+      "Latest values - field3: 0, field4: 1\n",
+      "Field3 is 0\n",
+      "Value 0 was successfully written to field5.\n",
+      "Value 1 was successfully written to field6.\n",
+      "Latest values - field3: 1, field4: 1\n",
+      "Field3 is 1 and Field4 is 1\n",
+      "Value 1 was successfully written to field5.\n",
+      "Value 1 was successfully written to field6.\n",
+      "Latest values - field3: 1, field4: 1\n",
+      "Field3 is 1 and Field4 is 1\n"
+     ]
+    },
+    {
+     "ename": "KeyboardInterrupt",
+     "evalue": "",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mKeyboardInterrupt\u001b[0m                         Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-4-62881ca6c5ef>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[1;32m     86\u001b[0m \u001b[0;31m# Main loop\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     87\u001b[0m \u001b[0;32mwhile\u001b[0m \u001b[0;32mTrue\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 88\u001b[0;31m     \u001b[0mprocess_data\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     89\u001b[0m     \u001b[0mtime\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msleep\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m60\u001b[0m\u001b[0;34m)\u001b[0m  \u001b[0;31m# Adjust the time interval as needed\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m<ipython-input-4-62881ca6c5ef>\u001b[0m in \u001b[0;36mprocess_data\u001b[0;34m()\u001b[0m\n\u001b[1;32m     61\u001b[0m                 \u001b[0;31m# Send data for field5\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     62\u001b[0m                 \u001b[0mresponse1\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mrequests\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mpost\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mwrite_url\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdata\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mpayload1\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 63\u001b[0;31m                 \u001b[0mtime\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msleep\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m20\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     64\u001b[0m                 \u001b[0;32mif\u001b[0m \u001b[0mresponse1\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mstatus_code\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m200\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     65\u001b[0m                     \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34mf\"Value {latest_field3} was successfully written to field5.\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mKeyboardInterrupt\u001b[0m: "
+     ]
+    }
+   ],
+   "source": [
+    "import requests\n",
+    "import time\n",
+    "\n",
+    "# Define the API URLs for reading data and sending results\n",
+    "read_url = \"https://api.thingspeak.com/channels/2462354/feeds.json?api_key=2TJ9A8LTBYXPGU8O&results=\"  # Fetch only the latest record\n",
+    "write_url = \"https://api.thingspeak.com/update?api_key=53VJ2RBTNRLXJIN9\"  # Replace with your actual API endpoint\n",
+    "\n",
+    "# Define the API key\n",
+    "api_key = \"53VJ2RBTNRLXJIN9\"\n",
+    "\n",
+    "def process_data():\n",
+    "    try:\n",
+    "        # Make the API request to read data\n",
+    "        response = requests.get(read_url)\n",
+    "\n",
+    "        # Check if the request was successful\n",
+    "        if response.status_code == 200:\n",
+    "            # Extract the JSON data from the response\n",
+    "            data = response.json()\n",
+    "\n",
+    "            # Extract the latest feed from the response\n",
+    "            feeds = data[\"feeds\"]\n",
+    "\n",
+    "            # Initialize variables to store the latest values of field3 and field4\n",
+    "            latest_field3 = None\n",
+    "            latest_field4 = None\n",
+    "\n",
+    "            # Iterate through the feeds in reverse order to find the latest values of field3 and field4\n",
+    "            for feed in reversed(feeds):\n",
+    "                if \"field3\" in feed and feed[\"field3\"] is not None:\n",
+    "                    latest_field3 = feed[\"field3\"]\n",
+    "                    break\n",
+    "\n",
+    "            for feed in reversed(feeds):\n",
+    "                if \"field4\" in feed and feed[\"field4\"] is not None:\n",
+    "                    latest_field4 = feed[\"field4\"]\n",
+    "                    break\n",
+    "\n",
+    "            # Check if both field3 and field4 have valid values\n",
+    "            if latest_field3 is not None and latest_field4 is not None:\n",
+    "                print(f\"Latest values - field3: {latest_field3}, field4: {latest_field4}\")\n",
+    "\n",
+    "                # Check the conditions and print messages accordingly\n",
+    "                if latest_field3 == \"1\" and latest_field4 == \"1\":\n",
+    "                    print(\"Field3 is 1 and Field4 is 1\")\n",
+    "                    pmod_pin2.write(1)\n",
+    "                    pmod_pin3.write(1)\n",
+    "                elif latest_field3 == \"1\" and latest_field4 == \"0\":\n",
+    "                    print(\"Field3 is 1 and Field4 is 0\")\n",
+    "                    pmod_pin2.write(1)\n",
+    "                    pmod_pin3.write(0)\n",
+    "                else:\n",
+    "                    print(\"Field3 is 0\")\n",
+    "                    pmod_pin2.write(0)\n",
+    "                    pmod_pin3.write(0)\n",
+    "\n",
+    "                # Define the payloads for each field\n",
+    "                payload1 = {\"api_key\": api_key, \"field5\": latest_field3}\n",
+    "                payload2 = {\"api_key\": api_key, \"field6\": latest_field4}\n",
+    "\n",
+    "                # Send data for field5\n",
+    "                response1 = requests.post(write_url, data=payload1)\n",
+    "                time.sleep(20)\n",
+    "                if response1.status_code == 200:\n",
+    "                    print(f\"Value {latest_field3} was successfully written to field5.\")\n",
+    "                else:\n",
+    "                    print(f\"Error writing value to field5. Status code: {response1.status_code}\")\n",
+    "\n",
+    "                # Send data for field6\n",
+    "                response2 = requests.post(write_url, data=payload2)\n",
+    "                time.sleep(20)\n",
+    "                if response2.status_code == 200:\n",
+    "                    print(f\"Value {latest_field4} was successfully written to field6.\")\n",
+    "                else:\n",
+    "                    print(f\"Error writing value to field6. Status code: {response2.status_code}\")\n",
+    "\n",
+    "            else:\n",
+    "                print(\"No valid values found for field3 and field4 in the latest feeds.\")\n",
+    "\n",
+    "        else:\n",
+    "            print(f\"Failed to fetch data from ThingSpeak. Status code: {response.status_code}\")\n",
+    "\n",
+    "    except Exception as e:\n",
+    "        print(f\"An error occurred: {e}\")\n",
+    "\n",
+    "# Main loop\n",
+    "while True:\n",
+    "    process_data()\n",
+    "    time.sleep(60)  # Adjust the time interval as needed"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
